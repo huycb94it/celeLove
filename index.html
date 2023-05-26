@@ -1,113 +1,88 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Love Days Count</title>
-  <style>
-    body {
-      background-color: rgb(61, 223, 61);
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-    }
-    
-    .container {
-      width: 50%;
-      max-width: 500px;
-      margin: auto;
-    }
-    
-    .image-container {
-      display: flex;
-      flex-direction: row;
-      justify-content: space-around;
-    }
-    
-    .image {
-      width: 100px;
-      height: 100px;
-      border-radius: 50%;
-      margin-bottom: 20px;
-    }
-    
-    .heart {
-      width: 100px;
-      height: 100px;
-      border-radius: 50%;
-      background-color: red;
-      position: relative;
-      animation: heart 1s infinite linear;
-    }
-    
-    @keyframes heart {
-      0% {
-        transform: scale(0.5);
-        left: 50px;
-        top: 50px;
-      }
-      50% {
-        transform: scale(1);
-        left: 0;
-        top: 0;
-      }
-      100% {
-        transform: scale(0.5);
-        right: 50px;
-        bottom: 50px;
-      }
-    }
-    
-    .text {
-      font-size: 20px;
-      font-weight: bold;
-    }
-    
-    .timer {
-      font-size: 16px;
-    }
-    
-    .footer {
-      text-align: center;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ngày Yêu Nhau</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #eaf7ef;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        h1 {
+            color: #198754;
+            margin-bottom: 20px;
+        }
+
+        .image-container {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+
+        .image-container img {
+            width: 200px;
+            height: auto;
+            margin: 0 10px;
+            border-radius: 50%;
+        }
+
+        .clock-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .clock {
+            font-size: 48px;
+            color: #198754;
+            margin-left: 10px;
+        }
+    </style>
 </head>
+
 <body>
-  <div class="container">
+    <h1>Ngày Yêu Nhau</h1>
+
     <div class="image-container">
-      <img src="img/Me.jpg" class="image" alt="Image 1">
-      <img src="img/meo.jpg" class="image" alt="Image 2">
+        <img src="img/Me.jpg" alt="Người 1">
+        <img src="img/meo.jpg" alt="Người 2">
     </div>
-    <div class="heart"><svg viewBox="0 0 100 100">
-        <path d="M50,25
-          A25,25 0 0 1 25,50
-          A25,25 0 0 1 50,75
-          A25,25 0 0 1 75,50
-          A25,25 0 0 1 50,25z" fill="red" stroke="black" stroke-width="2"/>
-      </svg>
-      </div>
-    <div class="text">
-      <h1>We've been together for</h1>
-      <h2 id="days"></h2>
-      <h3>days</h3>
+
+    <div class="clock-container">
+        <img src="img/hourglass-g220fafb7b_1280.png" alt="Đồng hồ cát">
+        <div class="clock" id="daysCounter"></div>
     </div>
-    <div class="timer">
-      <h4>And counting...</h4>
-    </div>
-    <div class="footer">
-      <p>Be together forever</p>
-    </div>
-  </div>
-  <script>
-    var days = Math.round((new Date("2023-05-25") - new Date("2022-09-23")) / (1000 * 60 * 60 * 24));
-    document.getElementById("days").innerHTML = days;
-    
-    setInterval(function() {
-      days++;
-      document.getElementById("days").innerHTML = days;
-    }, 1000);
-  </script>
+
+    <script>
+        // Tính số ngày yêu nhau
+        function calculateDays(startDate) {
+            var now = new Date();
+            var timeDiff = Math.abs(now.getTime() - startDate.getTime());
+            var days = Math.ceil(timeDiff / (1000 * 3600 * 24));
+            return days;
+        }
+
+        // Cập nhật số ngày yêu nhau trên trang web
+        function updateDaysCounter() {
+            var startDate = new Date("2022-09-23");
+            var daysCounter = document.getElementById("daysCounter");
+            var days = calculateDays(startDate);
+            daysCounter.innerText = days + " ngày";
+        }
+
+        // Gọi hàm cập nhật số ngày yêu nhau
+        updateDaysCounter();
+    </script>
 </body>
+
 </html>
